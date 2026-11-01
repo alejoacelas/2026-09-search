@@ -10,7 +10,7 @@ the data, behaviour and rebuild steps.
   Tailscale Serve proxies tailnet HTTP port 80 to it. Deploy by copying the files there
   as the README shows, then `systemctl --user restart search.service`.
 - The server itself is documented in
-  [`~/best/stash/agent-server`](/Users/alejo/best/stash/agent-server/docs/setup.md).
+  [`~/best/stash/server`](/Users/alejo/best/stash/server/docs/setup.md).
 
 On 2026-10-03, 18 requests from the Mac had a 43 ms median total time and 4 ms median
 server search time; the slowest took 477 ms. A one-letter query took about 298 ms,

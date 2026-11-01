@@ -41,11 +41,11 @@ mkdir -p "$runtime/data" "$HOME/.config/systemd/user"
 curl -fL --retry 3 \
   https://huggingface.co/datasets/wikimedia/wikipedia/resolve/3e1f92c331f318af862b87e2319ed5dc26d80f5d/20231101.simple/train-00000-of-00001.parquet \
   -o "$runtime/data/wikipedia.parquet"
-# From the repository root on the server:
-cp search/{index.py,server.py,index.html,app.js,style.css} "$runtime/"
+# From a checkout of this repository on the server:
+cp {index.py,server.py,index.html,app.js,style.css} "$runtime/"
 "$runtime/.venv/bin/python" "$runtime/index.py" \
   "$runtime/data/wikipedia.parquet" "$runtime/data/search.sqlite"
-cp search/search.service "$HOME/.config/systemd/user/"
+cp search.service "$HOME/.config/systemd/user/"
 systemctl --user daemon-reload
 sudo loginctl enable-linger "$USER"
 systemctl --user enable --now search.service
@@ -59,8 +59,8 @@ There is no public listener, Funnel, or additional application login. Tailnet
 access rules determine who can read the corpus. No credentials are needed.
 
 ```sh
-python3 -m unittest discover -s search -v
-node --check search/app.js
+python3 -m unittest discover -v
+node --check app.js
 curl 'http://agent-server/api/search?q=quantum%20mec'
 systemctl --user status search.service
 ```
